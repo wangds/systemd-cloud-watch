@@ -14,8 +14,8 @@ type Config struct {
 	LogPriority          string   `hcl:"log_priority"`
 	JournalDir           string   `hcl:"journal_dir"`
 	QueueChannelSize     int      `hcl:"queue_channel_size"`
-	QueuePollDurationMS  uint64   `hcl:"queue_poll_duration_ms"`
-	FlushLogEntries      uint64   `hcl:"queue_flush_log_ms"`
+	QueuePollDurationMS  int64    `hcl:"queue_poll_duration_ms"`
+	FlushLogEntries      int64    `hcl:"queue_flush_log_ms"`
 	QueueBatchSize       int      `hcl:"queue_batch_size"`
 	CloudWatchBufferSize int      `hcl:"buffer_size"`
 	Debug                bool     `hcl:"debug"`
