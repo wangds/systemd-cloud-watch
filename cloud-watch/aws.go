@@ -15,6 +15,15 @@ import (
 var awsLogger = lg.NewSimpleLogger("aws")
 
 func NewAWSSession(cfg *Config) *awsSession.Session {
+	if cfg.SharedCredentialFile != "" && cfg.SharedCredentialProfile != "" {
+		credentials := awsCredentials.NewSharedCredentials(cfg.SharedCredentialFile, cfg.SharedCredentialProfile)
+		awsConfig := &aws.Config{
+			Credentials: credentials,
+			Region:      aws.String(cfg.AWSRegion),
+			MaxRetries:  aws.Int(3),
+		}
+		return awsSession.New(awsConfig)
+	}
 
 	metaDataClient, session := getClient(cfg)
 	credentials := getCredentials(metaDataClient)

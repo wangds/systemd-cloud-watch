@@ -29,6 +29,8 @@ type Config struct {
 	omitFields           map[string]struct{}
 	FieldLength          int  `hcl:"field_length"`
 	MockCloudWatch       bool `hcl:"mock-cloud-watch"`
+	SharedCredentialFile    string  `hcl:"shared_credential_file"`
+	SharedCredentialProfile string  `hcl:"shared_credential_profile"`
 }
 
 func (config *Config) GetJournalDLogPriority() Priority {
