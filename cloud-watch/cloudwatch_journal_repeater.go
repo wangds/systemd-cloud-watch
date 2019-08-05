@@ -101,8 +101,12 @@ func (repeater *CloudWatchJournalRepeater) WriteBatch(records []*Record) error {
 		}
 
 		if len(describeOutput.LogStreams) > 0 {
-			repeater.nextSequenceToken =
-				*describeOutput.LogStreams[0].UploadSequenceToken
+			if describeOutput.LogStreams[0].UploadSequenceToken == nil {
+				repeater.nextSequenceToken = ""
+			} else {
+				repeater.nextSequenceToken =
+					*describeOutput.LogStreams[0].UploadSequenceToken
+			}
 
 			if debug {
 				logger.Debug("Next Token ", repeater.nextSequenceToken)
